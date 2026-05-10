@@ -6,7 +6,7 @@
 
 ## 📥 下载地址
 蓝奏云高速下载：
-https://wwbkz.lanzout.com/i5CMb3p60d3g
+https://wwbkz.lanzout.com/ixqvY3p6jula
 
 ## 功能一览
 - 硬件信息检测：CPU / 主板 / 内存 / 硬盘 / 显卡 / 电池 / 网卡
