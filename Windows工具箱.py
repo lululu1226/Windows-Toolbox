@@ -41,26 +41,29 @@ class TuBaToolBox:
         self.is_testing = False
         self.startup_items = []
 
-        # 标签页
+        # 按你指定顺序创建9个标签页
         self.notebook = ttk.Notebook(root)
         self.notebook.pack(fill=tk.X, padx=5, pady=5)
 
-        self.tab1 = ttk.Frame(self.notebook)
-        self.tab2 = ttk.Frame(self.notebook)
-        self.tab3 = ttk.Frame(self.notebook)
-        self.tab4 = ttk.Frame(self.notebook)
-        self.tab5 = ttk.Frame(self.notebook)
-        self.tab6 = ttk.Frame(self.notebook)
-        self.tab7 = ttk.Frame(self.notebook)
+        self.tab1 = ttk.Frame(self.notebook)   # 硬件信息
+        self.tab2 = ttk.Frame(self.notebook)   # 硬件测试
+        self.tab3 = ttk.Frame(self.notebook)   # 系统工具
+        self.tab4 = ttk.Frame(self.notebook)   # 网络优化
+        self.tab5 = ttk.Frame(self.notebook)   # 系统清理 & 修复
+        self.tab6 = ttk.Frame(self.notebook)   # 实用小工具
+        self.tab7 = ttk.Frame(self.notebook)   # 扩展高级功能
+        self.tab8 = ttk.Frame(self.notebook)   # 软件下载
+        self.tab9 = ttk.Frame(self.notebook)   # 关于软件
 
-        # 顺序：软件下载 在 关于软件 前面
         self.notebook.add(self.tab1, text="硬件信息")
         self.notebook.add(self.tab2, text="硬件测试")
         self.notebook.add(self.tab3, text="系统工具")
-        self.notebook.add(self.tab4, text="实用小工具")
-        self.notebook.add(self.tab5, text="扩展功能")
-        self.notebook.add(self.tab7, text="软件下载")
-        self.notebook.add(self.tab6, text="关于软件")
+        self.notebook.add(self.tab4, text="网络优化")
+        self.notebook.add(self.tab5, text="系统清理 & 修复")
+        self.notebook.add(self.tab6, text="实用小工具")
+        self.notebook.add(self.tab7, text="扩展高级功能")
+        self.notebook.add(self.tab8, text="软件下载")
+        self.notebook.add(self.tab9, text="关于软件")
 
         # 日志框
         self.log_frame = ttk.Frame(root)
@@ -71,7 +74,7 @@ class TuBaToolBox:
         # 智能自动布局
         self.init_auto_layout()
 
-        # ========== 硬件信息 ==========
+        # ===================== 1.硬件信息 =====================
         self.add_btn_auto(self.tab1, "CPU完整信息", self.cpu_full)
         self.add_btn_auto(self.tab1, "主板BIOS信息", self.mobo_bios)
         self.add_btn_auto(self.tab1, "内存详细信息", self.ram_full)
@@ -80,7 +83,7 @@ class TuBaToolBox:
         self.add_btn_auto(self.tab1, "电池损耗信息", self.battery_full)
         self.add_btn_auto(self.tab1, "网卡WiFi信息", self.net_full)
 
-        # ========== 硬件测试 ==========
+        # ===================== 2.硬件测试 =====================
         self.add_btn_auto(self.tab2, "屏幕坏点测试", self.screen_test)
         self.add_btn_auto(self.tab2, "硬盘读写测速", self.disk_speed_test)
         self.add_btn_auto(self.tab2, "U盘测速", self.usb_test)
@@ -89,66 +92,69 @@ class TuBaToolBox:
         self.add_btn_auto(self.tab2, "内存稳定性测试", self.ram_test)
         self.add_btn_auto(self.tab2, "整机跑分", self.benchmark)
 
-        # ========== 系统工具 ==========
+        # ===================== 3.系统工具 =====================
         self.add_btn_auto(self.tab3, "系统激活查询", self.win_activate)
         self.add_btn_auto(self.tab3, "系统版本信息", self.sys_info)
         self.add_btn_auto(self.tab3, "查看开机启动项", self.get_real_startup)
         self.add_btn_auto(self.tab3, "禁用单个启动项", self.disable_selected_startup)
         self.add_btn_auto(self.tab3, "禁用全部启动项", self.disable_all_startup)
-        self.add_btn_auto(self.tab3, "清理无效启动项", self.clean_invalid_startup)
         self.add_btn_auto(self.tab3, "进程管理", self.process_mgr)
-        self.add_btn_auto(self.tab3, "系统垃圾清理", self.clean_temp)
-        self.add_btn_auto(self.tab3, "网络修复", self.net_fix)
-        self.add_btn_auto(self.tab3, "端口扫描", self.port_scan)
         self.add_btn_auto(self.tab3, "时间校准", self.time_sync)
-        self.add_btn_auto(self.tab3, "一键清理磁盘", self.clean_disk)
-        self.add_btn_auto(self.tab3, "激活Windows", self.activate_windows)
-        self.add_btn_auto(self.tab3, "激活Office", self.activate_office)
-        self.add_btn_auto(self.tab3, "卸载极域网络驱动", self.uninstall_jiyu_driver)
-        self.add_btn_auto(self.tab3, "开启全局小窗", self.enable_small_window)
-        self.add_btn_auto(self.tab3, "关闭全局小窗", self.disable_small_window)
-        self.add_btn_auto(self.tab3, "清除文件资源历史", self.clear_explorer_address_history)
-        self.add_btn_auto(self.tab3, "清除远程桌面记录", self.clear_rdp_history)
-
-        # 新增：防火墙 / Defender
         self.add_btn_auto(self.tab3, "关闭Windows防火墙", self.close_firewall)
         self.add_btn_auto(self.tab3, "开启Windows防火墙", self.open_firewall)
         self.add_btn_auto(self.tab3, "关闭病毒和威胁防护", self.disable_defender)
-        self.add_btn_auto(self.tab3, "清除浏览器数据", self.clear_browser_data)
+        self.add_btn_auto(self.tab3, "关闭Windows更新", self.disable_wu)
+        self.add_btn_auto(self.tab3, "恢复Windows更新", self.enable_wu)
+        self.add_btn_auto(self.tab3, "开启高性能模式", self.enable_high_power)
+        self.add_btn_auto(self.tab3, "激活Windows", self.activate_windows)
+        self.add_btn_auto(self.tab3, "激活Office", self.activate_office)
 
-        # ========== 实用工具 ==========
-        self.add_btn_auto(self.tab4, "硬件温度监控", self.temp_monitor)
-        self.add_btn_auto(self.tab4, "配置导出截图", self.export_config)
-        self.add_btn_auto(self.tab4, "电源模式切换", self.power_mode)
+        # ===================== 4.网络优化 =====================
+        self.add_btn_auto(self.tab4, "网络修复", self.net_fix)
+        self.add_btn_auto(self.tab4, "端口扫描", self.port_scan)
         self.add_btn_auto(self.tab4, "局域网设备扫描", self.lan_scan)
-        self.add_btn_auto(self.tab4, "文件哈希校验", self.hash_check)
-        self.add_btn_auto(self.tab4, "驱动检测", self.driver_check)
-
         self.add_btn_auto(self.tab4, "查看WiFi密码", self.show_wifi_password)
-        self.add_btn_auto(self.tab4, "文件强制解锁", self.unlock_file)
 
-        # ========== 扩展功能 ==========
-        self.add_btn_auto(self.tab5, "软件强制卸载", self.uninstall_tool)
-        self.add_btn_auto(self.tab5, "蓝屏日志分析", self.bsod_analyze)
-        self.add_btn_auto(self.tab5, "关闭Windows更新", self.disable_wu)
-        self.add_btn_auto(self.tab5, "恢复Windows更新", self.enable_wu)
-        self.add_btn_auto(self.tab5, "开启高性能模式", self.enable_high_power)
-        self.add_btn_auto(self.tab5, "USB外设检测", self.usb_devices)
-        self.add_btn_auto(self.tab5, "卸载预装应用", self.remove_bloatware)
-        self.add_btn_auto(self.tab5, "恢复预装应用", self.restore_bloatware)
-
+        # ===================== 5.系统清理 & 修复 =====================
+        self.add_btn_auto(self.tab5, "系统垃圾清理", self.clean_temp)
+        self.add_btn_auto(self.tab5, "一键清理磁盘", self.clean_disk)
+        self.add_btn_auto(self.tab5, "清理无效启动项", self.clean_invalid_startup)
+        self.add_btn_auto(self.tab5, "清除浏览器数据", self.clear_browser_data)
+        self.add_btn_auto(self.tab5, "清除文件资源历史", self.clear_explorer_address_history)
+        self.add_btn_auto(self.tab5, "清除远程桌面记录", self.clear_rdp_history)
         self.add_btn_auto(self.tab5, "修复VC++运行库", self.fix_vcpp)
+        self.add_btn_auto(self.tab5, "卸载极域网络驱动", self.uninstall_jiyu_driver)
+        self.add_btn_auto(self.tab5, "修复LNK快捷方式关联", self.fix_lnk_association)
 
-        # ========== 软件下载 ==========
+        # ===================== 6.实用小工具 =====================
+        self.add_btn_auto(self.tab6, "硬件温度监控", self.temp_monitor)
+        self.add_btn_auto(self.tab6, "配置导出截图", self.export_config)
+        self.add_btn_auto(self.tab6, "电源模式切换", self.power_mode)
+        self.add_btn_auto(self.tab6, "文件哈希校验", self.hash_check)
+        self.add_btn_auto(self.tab6, "驱动检测", self.driver_check)
+        self.add_btn_auto(self.tab6, "文件强制解锁", self.unlock_file)
+        self.add_btn_auto(self.tab6, "USB外设检测", self.usb_devices)
+
+        # ===================== 7.扩展高级功能 =====================
+        self.add_btn_auto(self.tab7, "软件强制卸载", self.uninstall_tool)
+        self.add_btn_auto(self.tab7, "蓝屏日志分析", self.bsod_analyze)
+        self.add_btn_auto(self.tab7, "卸载预装应用", self.remove_bloatware)
+        self.add_btn_auto(self.tab7, "恢复预装应用", self.restore_bloatware)
+        self.add_btn_auto(self.tab7, "开启全局小窗", self.enable_small_window)
+        self.add_btn_auto(self.tab7, "关闭全局小窗", self.disable_small_window)
+
+        # ===================== 8.软件下载 =====================
         self.build_download_tab()
 
-        # ========== 关于软件 ==========
-        about_label1 = ttk.Label(self.tab6, text="Windows工具箱", font=("微软雅黑", 16, "bold"))
+        # ===================== 9.关于软件（已修改为分行显示） =====================
+        about_label1 = ttk.Label(self.tab9, text="Windows工具箱", font=("微软雅黑", 16, "bold"))
         about_label1.pack(pady=30)
-        about_label2 = ttk.Label(self.tab6, text="作者：lululu1226", font=("微软雅黑", 13))
+        about_label2 = ttk.Label(self.tab9, text="作者：lululu1226(G你的头)", font=("微软雅黑", 13))
         about_label2.pack(pady=10)
-        about_label4 = ttk.Label(self.tab6, text="功能涵盖：硬件检测、性能测试、系统优化、启动项管理、清理修复、网络驱动卸载、常用软件下载", font=("微软雅黑", 11))
-        about_label4.pack(pady=10)
+        about_label4_line1 = ttk.Label(self.tab9, text="功能涵盖：硬件检测、性能测试、系统优化、网络修复", font=("微软雅黑", 11))
+        about_label4_line1.pack(pady=5)
+        about_label4_line2 = ttk.Label(self.tab9, text="清理修复、实用工具、软件下载", font=("微软雅黑", 11))
+        about_label4_line2.pack(pady=5)
 
     # ===================== 智能自动布局 =====================
     def init_auto_layout(self):
@@ -166,7 +172,7 @@ class TuBaToolBox:
 
     # ===================== 下载页 =====================
     def build_download_tab(self):
-        ttk.Label(self.tab7, text="点击软件名自动跳浏览器下载（蓝色下划线）", font=("微软雅黑",12)).pack(pady=10)
+        ttk.Label(self.tab8, text="点击软件名自动跳浏览器下载（蓝色下划线）", font=("微软雅黑",12)).pack(pady=10)
         soft_list = [
             ("微信", "https://dldir1.qq.com/weixin/Windows/WeChatSetup.exe"),
             ("QQ", "https://dldir1.qq.com/qqfile/qq/PCQQ9.7.1/QQ9.7.1.28950.exe"),
@@ -174,7 +180,7 @@ class TuBaToolBox:
             ("JiYuTrainer", "https://wwbkz.lanzout.com/iqQQG3p4116b"),
             ("Snipaste截图工具", "https://wwbkz.lanzout.com/i2eaK3p40rhc")
         ]
-        container = ttk.Frame(self.tab7)
+        container = ttk.Frame(self.tab8)
         container.pack(pady=10, fill=tk.X)
         fixed_width = 16
         col = 0
@@ -191,8 +197,33 @@ class TuBaToolBox:
                 row_frame = ttk.Frame(container)
                 row_frame.pack(pady=6)
 
-    # ===================== 新增6大功能 =====================
-    # 1. 关闭防火墙
+    # ===================== 新增：修复LNK快捷方式关联 =====================
+    def fix_lnk_association(self):
+        self.clear()
+        if not messagebox.askyesno("确认", "确定要修复 .lnk 快捷方式关联吗？\n修复后所有快捷方式图标和打开方式恢复正常"):
+            return
+        try:
+            # 删除错误注册表项
+            reg_path = r"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.lnk"
+            key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, reg_path, 0, winreg.KEY_ALL_ACCESS)
+            try:
+                winreg.DeleteKey(key, "UserChoice")
+            except:
+                pass
+            winreg.CloseKey(key)
+
+            # 恢复系统默认关联
+            subprocess.run('assoc .lnk=lnkfile', shell=True)
+            subprocess.run('ftype lnkfile=%SystemRoot%\system32\rundll32.exe url.dll,FileProtocolHandler %1', shell=True)
+
+            # 重启资源管理器
+            subprocess.run('taskkill /f /im explorer.exe && start explorer.exe', shell=True)
+            self.p("✅ .lnk 快捷方式关联修复完成！")
+            self.p("✅ 资源管理器已自动重启，立即生效")
+        except Exception as e:
+            self.p(f"❌ 修复失败：{str(e)}，请以管理员身份运行")
+
+    # ===================== 功能方法（全部原封不动） =====================
     def close_firewall(self):
         self.clear()
         try:
@@ -201,7 +232,6 @@ class TuBaToolBox:
         except:
             self.p("❌ 请以管理员身份运行")
 
-    # 2. 开启防火墙
     def open_firewall(self):
         self.clear()
         try:
@@ -210,7 +240,6 @@ class TuBaToolBox:
         except:
             self.p("❌ 请以管理员身份运行")
 
-    # 3. 关闭 Defender 实时防护
     def disable_defender(self):
         self.clear()
         try:
@@ -223,7 +252,6 @@ class TuBaToolBox:
         except:
             self.p("❌ 请以管理员身份运行")
 
-    # 4. 清除浏览器数据
     def clear_browser_data(self):
         self.clear()
         try:
@@ -235,7 +263,6 @@ class TuBaToolBox:
         except:
             self.p("❌ 关闭浏览器后重试")
 
-    # 5. 文件解锁
     def unlock_file(self):
         self.clear()
         path = filedialog.askopenfilename(title="选择被占用的文件")
@@ -248,7 +275,6 @@ class TuBaToolBox:
         except:
             self.p("❌ 解锁失败")
 
-    # 6. 查看WiFi密码
     def show_wifi_password(self):
         self.clear()
         try:
@@ -267,7 +293,6 @@ class TuBaToolBox:
         except:
             self.p("❌ 无法获取WiFi密码")
 
-    # 7. 修复VC++运行库（已修改为国内可访问 + 支持2015版本）
     def fix_vcpp(self):
         self.clear()
         self.p("======= VC++ 运行库一键修复（含2015-2022版）=======")
@@ -282,7 +307,6 @@ class TuBaToolBox:
             self.p("❌ 打开下载链接失败，请手动复制链接到浏览器：")
             self.p("https://aka.ms/vs/17/release/vc_redist.x64.exe")
 
-    # ===================== 原有功能函数（完全不动） =====================
     def clear_explorer_address_history(self):
         if not messagebox.askyesno("确认", "确定要清除文件资源管理器地址栏历史记录吗？"):
             return
