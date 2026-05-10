@@ -240,17 +240,30 @@ class TuBaToolBox:
         except:
             self.p("❌ 请以管理员身份运行")
 
+    # ===================== 已修改：关闭全部4项Defender保护 =====================
     def disable_defender(self):
         self.clear()
+        if not ctypes.windll.shell32.IsUserAnAdmin():
+            self.p("❌ 必须以【管理员身份】运行工具箱！")
+            self.p("💡 右键工具箱 → 以管理员身份运行")
+            return
+        
         try:
-            cmd = '''Set-MpPreference -DisableRealtimeMonitoring $true
-                     Set-MpPreference -DisableBehaviorMonitoring $true
-                     Set-MpPreference -DisableBlockAtFirstSeen $true
-                     Set-MpPreference -SubmitSamplesConsent 2'''
+            cmd = '''
+Set-MpPreference -DisableRealtimeMonitoring $true
+Set-MpPreference -DisableCloudProtection $true
+Set-MpPreference -DisableSubmitSamplesConsent $true
+Set-MpPreference -DisableBehaviorMonitoring $true
+Set-MpPreference -DisableBlockAtFirstSeen $true
+'''
             subprocess.run(f'powershell "{cmd}"', shell=True, check=True)
-            self.p("✅ 已关闭病毒和威胁防护")
+            self.p("✅ 已成功关闭 Windows 病毒和威胁防护！")
+            self.p("✅ 已关闭：实时保护 / 云保护 / 自动提交样本")
+            self.p("⚠️ 篡改保护无法自动关闭，已为你打开设置页面")
+            self.p("⚠️ 重启电脑后会自动恢复开启！")
+            subprocess.run('start windowsdefender://threatsettings', shell=True)
         except:
-            self.p("❌ 请以管理员身份运行")
+            self.p("❌ 关闭失败！请先手动关闭【篡改保护】再试！")
 
     def clear_browser_data(self):
         self.clear()
